@@ -13,6 +13,7 @@ function search(str) {
 	return results;
 }
 
+// is there a better way to delete all the lis?
 function hideSuggestions() {
 	while (suggestions.firstChild) {
 		suggestions.removeChild(suggestions.firstChild);
@@ -20,7 +21,7 @@ function hideSuggestions() {
 }
 
 function searchHandler(e) {
-	// input.value holds the text inside the input\
+	// input.value holds the text inside the input
 	showSuggestions(search(input.value), input.value);
 }
 
@@ -47,9 +48,11 @@ function useSuggestion(e) {
 	// delete current suggestions
 	// if the user back spaces, it should reappear
 
-	console.log(e.target.innerText);
-	input.value = e.target.innerText;
-	hideSuggestions();
+	// console.log(e.target);
+	if (e.target.tagName === "LI") {
+		input.value = e.target.innerText;
+		hideSuggestions();
+	}
 }
 
 input.addEventListener('keyup', searchHandler);
